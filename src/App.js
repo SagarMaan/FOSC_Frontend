@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { Fragment, useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
+
+import { Provider } from "react-redux";
+import store from "./store";
+
+import { loadUser } from "./actions/auth";
+// import setAuthToken from "./utils/setAuthToken";
+
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import PrivateRoute from "./components/routing/PrivateRoute";
+
+import "./App.css";
 
 function App() {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Fragment>
+        {/* <Navbar /> */}
+        <section>
+          <Switch>
+            <PrivateRoute
+              exact
+              path="/"
+              component={() => <div>Dashboard</div>}
+            />
+            <PrivateRoute
+              exact
+              path="/dashboard"
+              component={() => <div>Dashboard</div>}
+            />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+          </Switch>
+        </section>
+      </Fragment>
+    </Provider>
   );
 }
 
