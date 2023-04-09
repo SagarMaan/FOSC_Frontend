@@ -1,18 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 
-import { appConfig } from "../../config/config";
-
-async function getPosts() {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      "x-auth-token": localStorage.getItem("token"),
-    },
-  };
-  const res = await axios.get(`${appConfig.API_URL}/api/post`, config);
-  return res;
-}
+import { getPosts } from "../../scripts/dashboard";
 
 export default function Dashboard() {
   const [posts, setPosts] = useState([]);
