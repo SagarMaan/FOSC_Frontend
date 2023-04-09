@@ -9,6 +9,8 @@ import { loadUser } from "./actions/auth";
 
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import Dashboard from "./components/layout/Dashboard";
+
 import PrivateRoute from "./components/routing/PrivateRoute";
 
 import "./App.css";
@@ -24,16 +26,8 @@ function App() {
         {/* <Navbar /> */}
         <section>
           <Switch>
-            <PrivateRoute
-              exact
-              path="/"
-              component={() => <div>Dashboard</div>}
-            />
-            <PrivateRoute
-              exact
-              path="/dashboard"
-              component={() => <div>Dashboard</div>}
-            />
+            <PrivateRoute exact path="/" component={Dashboard} />
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
           </Switch>
