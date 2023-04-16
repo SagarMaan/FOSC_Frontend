@@ -7,23 +7,26 @@ import { register } from "../../actions/auth";
 
 const Register = ({ register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
+    firstName : "",
+    lastName : "",
+    emailId: "",
     password: "",
     password2: "",
+    phoneNumber :""
   });
 
-  const { name, email, password, password2 } = formData;
+  const {  firstName , lastName , emailId, password, password2 , phoneNumber } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    
     if (password !== password2) {
       console.log("Passwords do not match");
     } else {
-      register({ name, email, password });
+      register({ firstName , lastName , emailId, password, phoneNumber  });
     }
   };
 
@@ -36,39 +39,65 @@ const Register = ({ register, isAuthenticated }) => {
       <div className="flex flex-col justify-center items-center h-screen">
         <h2 className="text-xl font-bold mb-4">Sign In</h2>
         <form
-          className="bg-blue-50 rounded px-8 pt-6 pb-8 mb-4"
+          className="bg-blue-50 rounded px-6 pt-3 pb-4 mb-4"
           onSubmit={(e) => onSubmit(e)}
         >
+
+
+
           <div className="mb-4">
             <label
               className="block text-gray-700 font-bold mb-2"
-              htmlFor="email"
+              htmlFor="firstName"
             >
-              Name
+            First Name
             </label>
             <input
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
-              placeholder="Name"
-              name="name"
-              value={name}
+              placeholder="Enter Your First Name"
+              name="firstName"
+              value={firstName}
               onChange={(e) => onChange(e)}
               required
             />
           </div>
+
+
+
           <div className="mb-4">
             <label
               className="block text-gray-700 font-bold mb-2"
-              htmlFor="email"
+              htmlFor="lastName"
             >
-              Email
+            Last Name
+            </label>
+            <input
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              placeholder="Enter Your Last Name"
+              name="lastName"
+              value={lastName}
+              onChange={(e) => onChange(e)}
+              required
+            />
+          </div>
+
+
+
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 font-bold mb-2"
+              htmlFor="emailId"
+            >
+            Email ID
             </label>
             <input
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="email"
               placeholder="Email Address"
-              name="email"
-              value={email}
+              name="emailId"
+              value={emailId}
               onChange={(e) => onChange(e)}
               required
             />
@@ -77,6 +106,9 @@ const Register = ({ register, isAuthenticated }) => {
               Gravatar email
             </small>
           </div>
+
+
+
           <div className="mb-6">
             <label
               className="block text-gray-700 font-bold mb-2"
@@ -95,6 +127,9 @@ const Register = ({ register, isAuthenticated }) => {
               required
             />
           </div>
+
+
+
           <div className="mb-6">
             <label
               className="block text-gray-700 font-bold mb-2"
@@ -113,6 +148,30 @@ const Register = ({ register, isAuthenticated }) => {
               required
             />
           </div>
+
+
+
+          <div className="mb-6">
+            <label
+              className="block text-gray-700 font-bold mb-2"
+              htmlFor="phoneNumber"
+            >
+            Phone Number
+            </label>
+            <input
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              placeholder="Provide Your Mobile Number."
+              name="phoneNumber"
+              value={phoneNumber}
+              onChange={(e) => onChange(e)}
+              minLength="6"
+              required
+            />
+          </div>
+
+
+          
           <div className="flex items-center justify-between">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

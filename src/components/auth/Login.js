@@ -3,22 +3,23 @@ import PropTypes from "prop-types";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
+
 import { login } from "../../actions/auth";
 
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
-    email: "",
+    emailId: "",
     password: "",
   });
 
-  const { email, password } = formData;
+  const { emailId, password } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    login(email, password);
+    login(emailId, password);
   };
 
   if (isAuthenticated) {
@@ -44,13 +45,13 @@ const Login = ({ login, isAuthenticated }) => {
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="email"
               placeholder="Email Address"
-              name="email"
-              value={email}
+              name="emailId"
+              value={emailId}
               onChange={(e) => onChange(e)}
               required
             />
             <small>
-              Once logged in, you'll stay logged in for 100 hours unless you
+              Once logged in, you'll stay logged in for 1 hours unless you
               click logout
             </small>
           </div>
@@ -88,6 +89,8 @@ const Login = ({ login, isAuthenticated }) => {
   );
 };
 
+
+
 Login.propTypes = {
   login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
@@ -98,3 +101,4 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { login })(Login);
+

@@ -9,7 +9,7 @@ export async function getPosts() {
       "x-auth-token": localStorage.getItem("token"),
     },
   };
-  const res = await axios.get(`${appConfig.API_URL}/api/post`, config);
+  const res = await axios.get(`${appConfig.API_URL}/api/book/getList`, config);
   return res;
 }
 
